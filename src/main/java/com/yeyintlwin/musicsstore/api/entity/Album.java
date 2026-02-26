@@ -1,5 +1,6 @@
 package com.yeyintlwin.musicsstore.api.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,19 +16,24 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "albums")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@Schema(description = "Represents a music album")
 public class Album {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Unique identifier of the album", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
+    @Schema(description = "Name of the album", example = "Meteora")
     private String name;
 
     @CreationTimestamp
     @Column(name = "created_date", updatable = false)
+    @Schema(description = "Timestamp when the record was created", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime createdDate;
 
     @UpdateTimestamp
     @Column(name = "modified_date")
+    @Schema(description = "Timestamp when the record was last modified", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime modifiedDate;
 }
